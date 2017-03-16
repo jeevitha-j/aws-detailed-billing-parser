@@ -30,7 +30,7 @@ from elasticsearch import Elasticsearch, RequestsHttpConnection, helpers
 from requests_aws4auth import AWS4Auth
 
 from . import utils
-from .config import PROCESS_BY_BULK, PROCESS_BY_LINE, PROCESS_BI_ONLY
+from .config import PROCESS_BY_BULK, PROCESS_BY_LINE, PROCESS_BI_ONLY, ES_DOCTYPE
 
 
 def row_formatter(row):
