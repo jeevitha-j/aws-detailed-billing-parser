@@ -32,6 +32,14 @@ from requests_aws4auth import AWS4Auth
 from . import utils
 from .config import PROCESS_BY_BULK, PROCESS_BY_LINE, PROCESS_BI_ONLY
 
+
+def row_formatter(row):
+    """ Removes unwanted data from row dict """
+    doc_titles = ES_DOCTYPE['properties'].keys()
+    formatted_row = {title: row.get(title, '') for title in doc_titles}
+    return formatted_row
+
+
 Summary = collections.namedtuple('Summary', 'added skipped updated control_messages')
 """
 Holds the summary of documents processed by the parser.
@@ -70,6 +78,7 @@ def analytics(config, echo):
     csv_file = csv.DictReader(file_in, delimiter=config.csv_delimiter)
     analytics_list = list()
     for recno, json_row in enumerate(csv_file):
+        json_row = row_formatter(json_row)
         if is_control_message(json_row, config):
             continue
 
@@ -246,6 +255,7 @@ def parse(config, verbose=False):
 
             def documents():
                 for json_row in csv_file:
+                    json_row = row_formatter(json_row)
                     if not is_control_message(json_row, config):
                         if config.debug:
                             print(json.dumps(  # do not use 'echo()' here
@@ -289,6 +299,7 @@ def parse(config, verbose=False):
         with progressbar(length=record_count) as pbar:
             csv_file = csv.DictReader(file_in, delimiter=config.csv_delimiter)
             for recno, json_row in enumerate(csv_file):
+                json_row = row_formatter(json_row)
                 if is_control_message(json_row, config):
                     control += 1
                 else:
