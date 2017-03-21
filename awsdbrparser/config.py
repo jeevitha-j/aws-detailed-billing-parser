@@ -77,6 +77,75 @@ ES_DOCTYPE = {
         }
     ]
 }
+
+AWS_AVAILABLE_REGIONS = [
+  {
+    "amazon_name": "us-east-1",
+    "region": "US East (N. Virginia)",
+    "short_name": "USE1"
+  },
+  {
+    "amazon_name": "us-east-2",
+    "region": "US East (Ohio)",
+    "short_name": "USE2"
+  },
+  {
+    "amazon_name": "us-west-1",
+    "region": "US West (N. California)",
+    "short_name": "USW1"
+  },
+  {
+    "amazon_name": "us-west-2",
+    "region": "US West (Oregon)",
+    "short_name": "USW2"
+  },
+  {
+    "amazon_name": "ca-central-1",
+    "region": "Canada (Central)",
+    "short_name": "CAC1"
+  },
+  {
+    "amazon_name": "eu-west-1",
+    "region": "EU (Ireland)",
+    "short_name": "EUW1"
+  },
+  {
+    "amazon_name": "eu-central-1",
+    "region": "EU (Frankfurt)",
+    "short_name": "EUC2"
+  },
+  {
+    "amazon_name": "eu-west-2",
+    "region": "EU (London)",
+    "short_name": "EUW2"
+  },
+  {
+    "amazon_name": "ap-northeast-1",
+    "region": "Asia Pacific (Tokyo)",
+    "short_name": "APN1"
+  },
+  {
+    "amazon_name": "ap-northeast-2",
+    "region": "Asia Pacific (Seoul)",
+    "short_name": "APN2"
+  },
+  {
+    "amazon_name": "ap-southeast-1",
+    "region": "Asia Pacific (Singapore)",
+    "short_name": "APS1"
+  },
+  {
+    "amazon_name": "ap-southeast-2",
+    "region": "Asia Pacific (Sydney)",
+    "short_name": "APS2"
+  },
+  {
+    "amazon_name": "ap-southeast-3",
+    "region": "Asia Pacific (Mumbai)",
+    "short_name": "APS3"
+  }
+]
+
 """
 DBR document properties for actual document type.
 See :attr:`Config.es_doctype` and :attr:`Config.mapping` for details.

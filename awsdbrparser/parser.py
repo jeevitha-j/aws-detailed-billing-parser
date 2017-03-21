@@ -30,12 +30,23 @@ from elasticsearch import Elasticsearch, RequestsHttpConnection, helpers
 from requests_aws4auth import AWS4Auth
 
 from . import utils
-from .config import PROCESS_BY_BULK, PROCESS_BY_LINE, PROCESS_BI_ONLY, ES_DOCTYPE
+from .config import PROCESS_BY_BULK, PROCESS_BY_LINE, PROCESS_BI_ONLY, ES_DOCTYPE, AWS_AVAILABLE_REGIONS
+
+aws_region_codes = list(map(lambda x: x['short_name'], AWS_AVAILABLE_REGIONS))
+aws_region_long_codes = list(map(lambda x: x['amazon_name'], AWS_AVAILABLE_REGIONS))
 
 
 def row_formatter(row):
     """ Removes unwanted data from row dict """
     doc_titles = ES_DOCTYPE['properties'].keys()
+
+    """ Defining region """
+    index = next((i for i, s in enumerate(aws_region_codes) if row['UsageType'].find(s) == 0), -1)
+    if index < 0:
+        index = next((i for i, s in enumerate(aws_region_long_codes) if row['UsageType'].find(s) == 0), -1)
+
+    row['Region'] = AWS_AVAILABLE_REGIONS[index]['region'] if index >= 0 else 'No region'
+
     formatted_row = {title: row.get(title, '') for title in doc_titles}
     return formatted_row
 
