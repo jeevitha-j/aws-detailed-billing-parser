@@ -40,7 +40,8 @@ ES_TIMEOUT = 30
 
 ES_DOCTYPE = {
     "properties": {
-        "LinkedAccountId": {"type": "string", "index": "not_analyzed"},
+        "Region": {"type": "string", "index": "not_analyzed"},
+	"LinkedAccountId": {"type": "string", "index": "not_analyzed"},
         "InvoiceID": {"type": "string", "index": "not_analyzed"},
         "RecordType": {"type": "string"},
         "RecordId": {"type": "string", "index": "not_analyzed"},
