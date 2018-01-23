@@ -38,7 +38,7 @@ aws_region_long_codes = list(map(lambda x: x['amazon_name'], AWS_AVAILABLE_REGIO
 
 def row_formatter(row):
     """ Removes unwanted data from row dict """
-    doc_titles = ES_DOCTYPE['properties'].keys()
+    doc_titles = list(map(lambda t: (str(t[0]), str(t[1].get('name', '')) or str(t[0])), ES_DOCTYPE['properties'].iteritems()))
 
     """ Defining region """
     index = next((i for i, s in enumerate(aws_region_codes) if row['UsageType'].find(s) == 0), -1)
@@ -47,7 +47,7 @@ def row_formatter(row):
 
     row['Region'] = AWS_AVAILABLE_REGIONS[index]['region'] if index >= 0 else 'No region'
 
-    formatted_row = {title: row.get(title, '') for title in doc_titles}
+    formatted_row = {title[0]: row.get(title[1], '') for title in doc_titles}
     return formatted_row
 
 
