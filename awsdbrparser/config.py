@@ -40,31 +40,31 @@ ES_TIMEOUT = 30
 
 ES_DOCTYPE = {
     "properties": {
-        "Region": {"type": "string", "index": "not_analyzed", "name": "product/region"},
-	"LinkedAccountId": {"type": "string", "index": "not_analyzed", "name": "lineItem/UsageAccountId"},
-        "InvoiceID": {"type": "string", "index": "not_analyzed", "name": "bill/InvoiceId"},
+        "Region": {"type": "string", "index": "not_analyzed"},
+	"LinkedAccountId": {"type": "string", "index": "not_analyzed"},
+        "InvoiceID": {"type": "string", "index": "not_analyzed"},
         "RecordType": {"type": "string"},
         "RecordId": {"type": "string", "index": "not_analyzed"},
-        "UsageType": {"type": "string", "index": "not_analyzed", "name": "lineItem/UsageType"},
-        "UsageEndDate": {"type": "date", "format": "YYYY-MM-dd HH:mm:ss", "name": "lineItem/UsageEndDate"},
-        "ItemDescription": {"type": "string", "index": "not_analyzed", "name": "lineItem/LineItemDescription"},
-        "ProductName": {"type": "string", "index": "not_analyzed", "name": "product/ProductName"},
+        "UsageType": {"type": "string", "index": "not_analyzed"},
+        "UsageEndDate": {"type": "date", "format": "YYYY-MM-dd HH:mm:ss"},
+        "ItemDescription": {"type": "string", "index": "not_analyzed"},
+        "ProductName": {"type": "string", "index": "not_analyzed"},
         "RateId": {"type": "string"},
         "Rate": {"type": "float"},
-        "AvailabilityZone": {"type": "string", "index": "not_analyzed", "name": "lineItem/AvailabilityZone"},
+        "AvailabilityZone": {"type": "string", "index": "not_analyzed"},
         "PricingPlanId": {"type": "string", "index": "not_analyzed"},
-        "ResourceId": {"type": "string", "index": "not_analyzed", "name": "lineItem/ResourceId"},
+        "ResourceId": {"type": "string", "index": "not_analyzed"},
         "Cost": {"type": "float"},
-        "PayerAccountId": {"type": "string", "index": "not_analyzed", "name": "bill/PayerAccountId"},
-        "SubscriptionId": {"type": "string", "index": "not_analyzed", "name": "reservation/reservationARN"},
-        "UsageQuantity": {"type": "float", "name": "lineItem/UsageAmount"},
-        "Operation": {"type": "string", "name": "lineItem/Operation"},
-        "ReservedInstance": {"type": "string", "index": "not_analyzed", "name": "pricing/PurchaseOption"},
-        "UsageStartDate": {"type": "date", "format": "YYYY-MM-dd HH:mm:ss", "name": "lineItem/UsageStartDate"},
-        "BlendedCost": {"type": "float", "name": "lineItem/BlendedCost"},
-        "BlendedRate": {"type": "float", "name": "lineItem/BlendedRate"},
-        "UnBlendedCost": {"type": "float", "name": "lineItem/UnblendedCost"},
-        "UnBlendedRate": {"type": "float", "name": "lineItem/UnblendedRate"}
+        "PayerAccountId": {"type": "string", "index": "not_analyzed"},
+        "SubscriptionId": {"type": "string", "index": "not_analyzed"},
+        "UsageQuantity": {"type": "float"},
+        "Operation": {"type": "string"},
+        "ReservedInstance": {"type": "string", "index": "not_analyzed"},
+        "UsageStartDate": {"type": "date", "format": "YYYY-MM-dd HH:mm:ss"},
+        "BlendedCost": {"type": "float"},
+        "BlendedRate": {"type": "float"},
+        "UnBlendedCost": {"type": "float"},
+        "UnBlendedRate": {"type": "float"}
     }, "dynamic_templates": [
         {
             "notanalyzed": {
@@ -147,6 +147,26 @@ AWS_AVAILABLE_REGIONS = [
   }
 ]
 
+ES_DOCTYPE_PROPERTIES_OPTIONS = {
+    'UnBlendedRate': {'name': 'lineItem/UnblendedRate'},
+    'BlendedRate': {'name': 'lineItem/BlendedRate'}, 'Rate': {'name': ''},
+    'RecordId': {'name': ''}, 'Operation': {'name': 'lineItem/Operation'},
+    'Cost': {'name': ''}, 'UsageType': {'name': 'lineItem/UsageType'},
+    'Region': {'name': 'product/region'}, 'InvoiceID': {'name': 'bill/InvoiceId'},
+    'UnBlendedCost': {'name': 'lineItem/UnblendedCost'}, 'PricingPlanId': {'name': ''},
+    'AvailabilityZone': {'name': 'lineItem/AvailabilityZone'},
+    'LinkedAccountId': {'name': 'lineItem/UsageAccountId'},
+    'PayerAccountId': {'name': 'bill/PayerAccountId'},
+    'UsageQuantity': {'name': 'lineItem/UsageAmount'},
+    'ReservedInstance': {'name': 'pricing/PurchaseOption'},
+    'ItemDescription': {'name': 'lineItem/LineItemDescription'}, 'RateId': {'name': ''},
+    'SubscriptionId': {'name': 'reservation/reservationARN'},
+    'BlendedCost': {'name': 'lineItem/BlendedCost'},
+    'UsageStartDate': {'name': 'lineItem/UsageStartDate'},
+    'UsageEndDate': {'name': 'lineItem/UsageEndDate'},
+    'ResourceId': {'name': 'lineItem/ResourceId'},
+    'ProductName': {'name': 'product/ProductName'}, 'RecordType': {'name': ''}
+}
 """
 DBR document properties for actual document type.
 See :attr:`Config.es_doctype` and :attr:`Config.mapping` for details.
