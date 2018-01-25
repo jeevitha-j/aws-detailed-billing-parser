@@ -23,6 +23,7 @@ import csv
 import json
 import threading
 import time
+import dateutil.parser
 
 import boto3
 import click
@@ -30,7 +31,7 @@ from elasticsearch import Elasticsearch, RequestsHttpConnection, helpers
 from requests_aws4auth import AWS4Auth
 
 from . import utils
-from .config import PROCESS_BY_BULK, PROCESS_BY_LINE, PROCESS_BI_ONLY, ES_DOCTYPE, AWS_AVAILABLE_REGIONS
+from .config import PROCESS_BY_BULK, PROCESS_BY_LINE, PROCESS_BI_ONLY, ES_DOCTYPE, AWS_AVAILABLE_REGIONS, ES_DOCTYPE_PROPERTIES_OPTIONS
 
 aws_region_codes = list(map(lambda x: x['short_name'], AWS_AVAILABLE_REGIONS))
 aws_region_long_codes = list(map(lambda x: x['amazon_name'], AWS_AVAILABLE_REGIONS))
@@ -38,7 +39,8 @@ aws_region_long_codes = list(map(lambda x: x['amazon_name'], AWS_AVAILABLE_REGIO
 
 def row_formatter(row):
     """ Removes unwanted data from row dict """
-    doc_titles = list(map(lambda t: (str(t[0]), str(t[1].get('name', '')) or str(t[0])), ES_DOCTYPE['properties'].iteritems()))
+    doc_titles = ES_DOCTYPE['properties'].keys()
+    row = {title: row.get(ES_DOCTYPE_PROPERTIES_OPTIONS[title].get('name', ''), '') for title in doc_titles}
 
     """ Defining region """
     index = next((i for i, s in enumerate(aws_region_codes) if row['UsageType'].find(s) == 0), -1)
@@ -47,7 +49,13 @@ def row_formatter(row):
 
     row['Region'] = AWS_AVAILABLE_REGIONS[index]['region'] if index >= 0 else 'No region'
 
-    formatted_row = {title[0]: row.get(title[1], '') for title in doc_titles}
+    formatted_row = row
+
+    if formatted_row.get('UsageStartDate'):
+        formatted_row['UsageStartDate'] = dateutil.parser.parse(formatted_row['UsageStartDate']).strftime('%Y-%m-%d %H:%M:%S')
+    if formatted_row.get('UsageEndDate'):
+        formatted_row['UsageEndDate'] = dateutil.parser.parse(formatted_row['UsageEndDate']).strftime('%Y-%m-%d %H:%M:%S')
+        
     return formatted_row
 
 
