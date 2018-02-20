@@ -41,7 +41,7 @@ ES_TIMEOUT = 30
 ES_DOCTYPE = {
     "properties": {
         "Region": {"type": "string", "index": "not_analyzed"},
-	"LinkedAccountId": {"type": "string", "index": "not_analyzed"},
+        "LinkedAccountId": {"type": "string", "index": "not_analyzed"},
         "InvoiceID": {"type": "string", "index": "not_analyzed"},
         "RecordType": {"type": "string"},
         "RecordId": {"type": "string", "index": "not_analyzed"},
@@ -64,7 +64,8 @@ ES_DOCTYPE = {
         "BlendedCost": {"type": "float"},
         "BlendedRate": {"type": "float"},
         "UnBlendedCost": {"type": "float"},
-        "UnBlendedRate": {"type": "float"}
+        "UnBlendedRate": {"type": "float"},
+        "BillingEntity": {"type": "string", "index": "not_analyzed"},
     }, "dynamic_templates": [
         {
             "notanalyzed": {
@@ -165,8 +166,11 @@ ES_DOCTYPE_PROPERTIES_OPTIONS = {
     'UsageStartDate': {'name': 'lineItem/UsageStartDate'},
     'UsageEndDate': {'name': 'lineItem/UsageEndDate'},
     'ResourceId': {'name': 'lineItem/ResourceId'},
-    'ProductName': {'name': 'product/ProductName'}, 'RecordType': {'name': ''}
+    'ProductName': {'name': 'product/ProductName'},
+    'RecordType': {'name': ''},
+    'BillingEntity': {'name': 'bill/BillingEntity'}
 }
+
 """
 DBR document properties for actual document type.
 See :attr:`Config.es_doctype` and :attr:`Config.mapping` for details.
