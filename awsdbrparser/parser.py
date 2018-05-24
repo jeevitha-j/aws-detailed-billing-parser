@@ -24,6 +24,8 @@ import json
 import threading
 import time
 import dateutil.parser
+import datetime
+from dateutil.tz import tzutc
 
 import boto3
 import click
@@ -48,6 +50,7 @@ def row_formatter(row):
         index = next((i for i, s in enumerate(aws_region_long_codes) if row['UsageType'].find(s) == 0), -1)
 
     row['Region'] = AWS_AVAILABLE_REGIONS[index]['region'] if index >= 0 else 'No region'
+    row['CreatedDateTime'] = datetime.datetime.now(tzutc()).strftime('%Y-%m-%d %H:%M:%S')
 
     formatted_row = row
 
