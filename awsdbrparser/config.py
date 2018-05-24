@@ -66,6 +66,7 @@ ES_DOCTYPE = {
         "UnBlendedCost": {"type": "float"},
         "UnBlendedRate": {"type": "float"},
         "BillingEntity": {"type": "string", "index": "not_analyzed"},
+        "CreatedDateTime": {"type": "date", "format": "YYYY-MM-dd HH:mm:ss"},
     }, "dynamic_templates": [
         {
             "notanalyzed": {
@@ -150,11 +151,16 @@ AWS_AVAILABLE_REGIONS = [
 
 ES_DOCTYPE_PROPERTIES_OPTIONS = {
     'UnBlendedRate': {'name': 'lineItem/UnblendedRate'},
-    'BlendedRate': {'name': 'lineItem/BlendedRate'}, 'Rate': {'name': ''},
-    'RecordId': {'name': ''}, 'Operation': {'name': 'lineItem/Operation'},
-    'Cost': {'name': ''}, 'UsageType': {'name': 'lineItem/UsageType'},
-    'Region': {'name': 'product/region'}, 'InvoiceID': {'name': 'bill/InvoiceId'},
-    'UnBlendedCost': {'name': 'lineItem/UnblendedCost'}, 'PricingPlanId': {'name': ''},
+    'BlendedRate': {'name': 'lineItem/BlendedRate'},
+    'Rate': {'name': ''},
+    'RecordId': {'name': ''},
+    'Operation': {'name': 'lineItem/Operation'},
+    'Cost': {'name': ''},
+    'UsageType': {'name': 'lineItem/UsageType'},
+    'Region': {'name': 'product/region'},
+    'InvoiceID': {'name': 'bill/InvoiceId'},
+    'UnBlendedCost': {'name': 'lineItem/UnblendedCost'},
+    'PricingPlanId': {'name': ''},
     'AvailabilityZone': {'name': 'lineItem/AvailabilityZone'},
     'LinkedAccountId': {'name': 'lineItem/UsageAccountId'},
     'PayerAccountId': {'name': 'bill/PayerAccountId'},
@@ -168,7 +174,8 @@ ES_DOCTYPE_PROPERTIES_OPTIONS = {
     'ResourceId': {'name': 'lineItem/ResourceId'},
     'ProductName': {'name': 'product/ProductName'},
     'RecordType': {'name': ''},
-    'BillingEntity': {'name': 'bill/BillingEntity'}
+    'BillingEntity': {'name': 'bill/BillingEntity'},
+    'CreatedDateTime': {'name': ''}
 }
 
 """
