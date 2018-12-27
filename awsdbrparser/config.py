@@ -67,6 +67,8 @@ ES_DOCTYPE = {
         "UnBlendedRate": {"type": "float"},
         "BillingEntity": {"type": "string", "index": "not_analyzed"},
         "CreatedDateTime": {"type": "date", "format": "YYYY-MM-dd HH:mm:ss"},
+        "InstanceType": {"type": "string", "index": "not_analyzed"},
+        "OSType": {"type": "string", "index": "not_analyzed"},
     }, "dynamic_templates": [
         {
             "notanalyzed": {
@@ -175,7 +177,9 @@ ES_DOCTYPE_PROPERTIES_OPTIONS = {
     'ProductName': {'name': 'product/ProductName'},
     'RecordType': {'name': ''},
     'BillingEntity': {'name': 'bill/BillingEntity'},
-    'CreatedDateTime': {'name': ''}
+    'CreatedDateTime': {'name': ''},
+    'InstanceType': {'name': 'product/instanceType'},
+    'OSType': {'name': 'product/operatingSystem'}
 }
 
 """
